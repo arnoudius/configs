@@ -1,80 +1,59 @@
 set encoding=utf-8
 set shell=/bin/sh
 
-" auto indentation
+" Auto indentation
 filetype plugin indent on
 
-" plug plugin manager
+" Plug plugin manager
 call plug#begin('~/.vim/plugged')
 
-"Plug 'leafgarland/typescript-vim'
-"Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-"Plug 'quramy/tsuquyomi'
-"Plug 'valloric/youcompleteme'
-
-"https://github.com/Valloric/YouCompleteMe/issues/1707
-Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
-"Plug 'ctrlpvim/ctrlp.vim'
-"Plug 'jremmen/vim-ripgrep'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plug 'junegunn/fzf.vim',
-Plug 'mozilla/doctorjs'
-"Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'joshdick/onedark.vim'
-Plug 'mxw/vim-jsx'
-Plug 'heavenshell/vim-prettier'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'eslint/eslint'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-fugitive'
-Plug 'tmhedberg/simpylfold'
+
+Plug 'neomake/neomake'
+
+"Plug 'eslint/eslint'
+"Plug 'scrooloose/syntastic'
+"Plug 'tpope/vim-fugitive'
+"Plug 'tmhedberg/simpylfold'
 Plug 'jiangmiao/auto-pairs'
-"Plug 'xolox/vim-misc' " used by vim-session
 Plug 'terryma/vim-multiple-cursors'
 Plug 'mattn/emmet-vim'
-"Plug 'bufkill.vim'
 Plug 'tpope/vim-surround' " easily replace quotes
-Plug 'scrooloose/nerdcommenter'  " easily comment out lines / blocks
-"Plug 'majutsushi/tagbar' " easily navigate trough file
-Plug 'groenewege/vim-less'
-Plug 'jimmyhchan/dustjs.vim'
-Plug 'easymotion/vim-easymotion'
-Plug 'airblade/vim-gitgutter'
-Plug 'jeetsukumaran/vim-buffergator'
+Plug 'scrooloose/nerdcommenter' " easily comment out lines / blocks
+"Plug 'jimmyhchan/dustjs.vim'
+"Plug 'easymotion/vim-easymotion'
+"Plug 'airblade/vim-gitgutter'
 Plug 'matze/vim-move'
+"Plug 'leafgarland/typescript-vim'
 
 call plug#end()
 
-"let g:tsuquyomi_use_vimproc = 1
-"let g:tsuquyomi_disable_quickfix = 1
-
-" theme
+" Theme
 syntax on
 
 if &diff
-  highlight DiffAdd    cterm=BOLD ctermfg=NONE ctermbg=22
+  highlight DiffAdd cterm=BOLD ctermfg=NONE ctermbg=22
   highlight DiffDelete cterm=BOLD ctermfg=NONE ctermbg=52
   highlight DiffChange cterm=BOLD ctermfg=NONE ctermbg=23
-  highlight DiffText   cterm=BOLD ctermfg=NONE ctermbg=23
+  highlight DiffText cterm=BOLD ctermfg=NONE ctermbg=23
 else
   colorscheme onedark
 endif
 
-
-" vim options
+" Vim options
 set number
 set numberwidth=8
 set hls
 set ic
 set t_ut= "disable background clearing
 set lsp=4
-" set guioptions -=m
-" set guioptions -=T
-" set guioptions -=L
-" set guioptions -=r
 set list
 set listchars=eol:¬,tab:→\ ,trail:·,extends:→,precedes:←
 set tabstop=2
@@ -89,8 +68,8 @@ set undodir=$HOME/.vim/undo_files//
 set nohlsearch
 set backspace=2
 
-" vim-javascript
-"let g:javascript_plugin_flow = 1
+" Vim gitgutter
+set updatetime=1000
 
 " Multicursor config
 let g:multicursor_insert_maps = 1
@@ -107,57 +86,47 @@ let g:NERDTreeWinSize=45 "fault NERDTree window width
 let g:NERDTreeCascadeSingleChildDir=0
 let g:NERDTreeCaseSensitiveSort=0
 
-" ripgrep
-"if executable('rg')
-  "set grepprg=rg\ --no-heading\ --vimgrep
-  "set grepformat=%f:%l:%c:%m
-"endif
-
 " Syntastic config
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_javascript_checkers = ['eslint']
-"let g:syntastic_typescript_checkers = ['tsuquyomi']
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 0
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
+"let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_debug = 3
 
-"let g:syntastic_debug = 3  " -> :mes
+" neomake config
+let g:neomake_javascript_enabled_makers = ['eslint']
 
-" key mappings
+call neomake#configure#automake('nrwi', 100)
+
+" vim-move config
+let g:move_key_modifier = 'C'
+
+" Prettier
+"nnoremap <C-F> :Prettier<CR>
+
+" Key mappings
 nmap <F9> :NERDTreeToggle<CR>
 nmap <F8> :NERDTreeFind<CR>
 
-
-
-" disable arrow keys
+" Disable arrow keys
 inoremap <Up> <NOP>
 inoremap <Down> <NOP>
 inoremap <Left> <NOP>
 inoremap <Right> <NOP>
 
-" tabs
+" Tabs
 nnoremap <C-t> :tabnew<CR>
 
-" fzf ctrl p ctrl b
+" FZF (ctrl p ctrl b)
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-l> :Lines<CR>
 nnoremap <C-b> :Buffers<CR>
 
-" automatically trim trailing whitespace
+" Automatically trim trailing whitespace
 autocmd BufWritePre * %s/\s\+$//e
 
-"let g:ctrlp_working_path_mode = 'ra'
-
-" move plugin
-let g:move_key_modifier = 'C'
-
-nnoremap <C-F> :Prettier<CR>
-
-set tags=tags
-
-"let g:ycm_semantic_triggers['typescript'] = ['.']
-"set completeopt-=preview

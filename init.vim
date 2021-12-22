@@ -55,6 +55,7 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 nnoremap <C-p> :GFiles<CR>
 nnoremap <C-l> :Lines<CR>
 nnoremap <C-b> :Buffers<CR>
+nnoremap <C-f> :Rg <C-R><C-W><CR>
 
 " vim-move config
 let g:move_key_modifier = 'C'

@@ -1,0 +1,43 @@
+font:
+  size: 16
+  normal:
+    family: Ubuntu Mono derivative Powerline
+
+  # better font rendering on macOS
+  use_thin_strokes: true
+
+window:
+  decorations: 'none'
+
+colors:
+  normal:
+    black:   '#2a2929'
+    red:     '#fb2c1e'
+    green:   '#2fcb70'
+    yellow:  '#f1c30d'
+    blue:    '#3397da'
+    magenta: '#6170c3'
+    cyan:    '#0094dd'
+    white:   '#dee1e9'
+
+  bright:
+    black:   '#dee1e9'
+    red:     '#e64b3b'
+    green:   '#07d673'
+    yellow:  '#f6c600'
+    blue:    '#0094dd'
+    magenta: '#6667c5'
+    cyan:    '#0091e1'
+    white:   '#fffefe'
+
+# Copy text by selecting it
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  save_to_clipboard: true
+
+# Clickable urls
+mouse:
+  hints:
+    launcher:
+      program: open
+    modifiers: Command

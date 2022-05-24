@@ -9,6 +9,7 @@ font:
 window:
   decorations: 'none'
 
+# Brogramming colors
 colors:
   normal:
     black:   '#2a2929'

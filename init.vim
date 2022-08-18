@@ -6,7 +6,6 @@ call plug#begin()
   Plug 'pangloss/vim-javascript'
   Plug 'preservim/nerdtree'
   Plug 'maxmellon/vim-jsx-pretty'
-  Plug 'neomake/neomake'
   Plug 'vim-airline/vim-airline-themes'
   Plug 'bling/vim-airline'
   Plug 'terryma/vim-multiple-cursors'
@@ -14,6 +13,7 @@ call plug#begin()
   Plug 'mattn/emmet-vim'
   Plug 'tpope/vim-surround'
   Plug 'scrooloose/nerdcommenter'
+  Plug 'dense-analysis/ale'
 call plug#end()"
 
 " Vim options
@@ -46,10 +46,14 @@ let g:NERDTreeWinSize=45 "fault NERDTree window width
 let g:NERDTreeCascadeSingleChildDir=0
 let g:NERDTreeCaseSensitiveSort=0
 
-" Neomake
-call neomake#configure#automake('nrwi', 100)
+" NerdCommenter
+let g:NERDSpaceDelims=1
 
-let g:neomake_javascript_enabled_makers = ['eslint']
+" Ale
+let b:ale_linters = ['eslint']
+let g:ale_javascript_eslint_use_global = 1
+let g:ale_javascript_eslint_executable = 'yarn'
+let g:ale_javascript_eslint_options = 'run eslint'
 
 " FZF (ctrl p ctrl b)
 nnoremap <C-p> :GFiles<CR>
